@@ -46,7 +46,7 @@ namespace QuizGame.Model
 
                 System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-                DisplayQuestion(question);
+                //DisplayQuestion(question);
 
                 var inputThread = new Thread(() => GetUserChoiceInBackground(stopwatch,question));
                 inputThread.Start();
