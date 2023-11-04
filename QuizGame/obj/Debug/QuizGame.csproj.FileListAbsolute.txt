@@ -5,3 +5,10 @@ C:\Users\dawid\Desktop\QuizGame\QuizGame\obj\Debug\QuizGame.csproj.AssemblyRefer
 C:\Users\dawid\Desktop\QuizGame\QuizGame\obj\Debug\QuizGame.csproj.CoreCompileInputs.cache
 C:\Users\dawid\Desktop\QuizGame\QuizGame\obj\Debug\QuizGame.exe
 C:\Users\dawid\Desktop\QuizGame\QuizGame\obj\Debug\QuizGame.pdb
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\QuizGame\bin\Debug\QuizGame.exe.config
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\QuizGame\bin\Debug\QuizGame.exe
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\QuizGame\bin\Debug\QuizGame.pdb
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\QuizGame\obj\Debug\QuizGame.csproj.AssemblyReference.cache
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\QuizGame\obj\Debug\QuizGame.csproj.CoreCompileInputs.cache
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\QuizGame\obj\Debug\QuizGame.exe
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\QuizGame\obj\Debug\QuizGame.pdb

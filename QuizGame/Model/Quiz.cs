@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuizGame.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,13 +11,11 @@ namespace QuizGame.Model
     public class Quiz
     {
         public List<Question> questions;
-        private int currentQuestionIndex;
         private int score;
 
         public Quiz()
         {
             questions = new List<Question>();
-            currentQuestionIndex = 0;
             score = 0;
         }
 
@@ -49,7 +48,7 @@ namespace QuizGame.Model
 
                 DisplayQuestion(question);
 
-                var inputThread = new Thread(() => GetUserChoiceInBackground(stopwatch));
+                var inputThread = new Thread(() => GetUserChoiceInBackground(stopwatch,question));
                 inputThread.Start();
 
                 if (inputThread.Join(TimeSpan.FromSeconds(timeLimitSeconds)))
@@ -65,16 +64,66 @@ namespace QuizGame.Model
                 Console.ReadKey();
                 Console.Clear();
             }
-
-            Console.WriteLine($"Koniec quizu. Twój wynik to: {score}/{questions.Count}");
+            if(score/questions.Count == 1)
+            {
+                Animations.PlayWinAnimation();
+            }
+            else
+            {
+                Console.WriteLine($"Koniec quizu. Twój wynik to: {score}/{questions.Count}");
+            }
             Console.WriteLine("Naciśnij dowolny klawisz, aby zamknąć program...");
             Console.ReadKey();
         }
 
         private int userChoiceResult;
-
-        private void GetUserChoiceInBackground(System.Diagnostics.Stopwatch stopwatch)
+        private void GetUserChoiceInBackground(System.Diagnostics.Stopwatch stopwatch, Question question)
         {
+            int userChoice = 1; // Domyślna opcja
+            int selectedOptionIndex = 0;
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine($"Pytanie: {question.Content}\n");
+
+                for (int i = 0; i < question.Options.Count; i++)
+                {
+                    Console.ForegroundColor = (i == selectedOptionIndex) ? ConsoleColor.Gray : ConsoleColor.White;
+                    Console.WriteLine($"{i + 1}. {question.Options[i]}");
+                    Console.ResetColor();
+                }
+
+                ConsoleKeyInfo key = Console.ReadKey(true);
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        selectedOptionIndex = (selectedOptionIndex > 0) ? selectedOptionIndex - 1 : question.Options.Count - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedOptionIndex = (selectedOptionIndex < question.Options.Count - 1) ? selectedOptionIndex + 1 : 0;
+                        break;
+                    case ConsoleKey.Enter:
+                        userChoice = selectedOptionIndex + 1;
+                        userChoiceResult = userChoice;
+                        stopwatch.Stop();
+                        return;
+                }
+
+            } while (true);
+        }
+
+        /*
+        private void GetUserChoiceInBackground(System.Diagnostics.Stopwatch stopwatch, Question question)
+        {
+            Console.WriteLine($"Pytanie: {question.Content}\n");
+
+            for (int i = 0; i < question.Options.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {question.Options[i]}");
+            }
+
+            Console.Write("Wybierz odpowiedź (podaj numer): ");
             int userChoice;
             while (!int.TryParse(Console.ReadLine(), out userChoice) || userChoice < 1 || userChoice > 4)
             {
@@ -96,6 +145,7 @@ namespace QuizGame.Model
 
             Console.Write("Wybierz odpowiedź (podaj numer): ");
         }
+        */
 
         private void ProcessUserChoice(int userChoice, Question question)
         {

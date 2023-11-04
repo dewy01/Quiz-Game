@@ -44,17 +44,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\QuizCreator.cs" />
-    <Compile Include="Data\QuizDataHandler.cs" />
+    <Compile Include="Controller\QuizDataHandler.cs" />
     <Compile Include="Model\Question.cs" />
     <Compile Include="Model\Quiz.cs" />
+    <Compile Include="Model\QuizSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Animations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

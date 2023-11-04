@@ -1,0 +1,5 @@
+Ile nóg ma koń?
+0. Jedną
+0. Dwie
+0. Cztery
+3

@@ -1,4 +1,4 @@
-﻿using QuizGame.Model;
+using QuizGame.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,14 +10,7 @@ namespace QuizGame.Data
 {
     public class QuizDataHandler
     {
-        private string filePath;
-
-        public QuizDataHandler(string filePath)
-        {
-            this.filePath = filePath;
-        }
-
-        public List<Question> LoadQuestions()
+        public List<Question> LoadQuestions(string filePath)
         {
             List<Question> loadedQuestions = new List<Question>();
 
@@ -61,18 +54,21 @@ namespace QuizGame.Data
             return loadedQuestions;
         }
 
-        public void SaveQuestions(List<Question> questions)
+        public void SaveQuestions(Quiz quizname, string filePath)
         {
+            List<Question> questions = quizname.questions;
             try
             {
                 using (StreamWriter sw = new StreamWriter(filePath))
                 {
                     foreach (var question in questions)
                     {
+                        int i = 1;
                         sw.WriteLine(question.Content);
                         foreach (var option in question.Options)
                         {
-                            sw.WriteLine(option);
+                            sw.WriteLine(i+". "+option);
+                            i++;
                         }
                         sw.WriteLine(question.CorrectOptionIndex + 1);
                     }
