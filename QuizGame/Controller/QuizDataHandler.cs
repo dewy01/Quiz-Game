@@ -57,6 +57,10 @@ namespace QuizGame.Data
         public void SaveQuestions(Quiz quizname, string filePath)
         {
             List<Question> questions = quizname.questions;
+            if (questions.Count == 0) { 
+                Console.WriteLine("Wystąpił błąd podczas zapisywania pliku"); 
+                return; 
+            }
             try
             {
                 using (StreamWriter sw = new StreamWriter(filePath))

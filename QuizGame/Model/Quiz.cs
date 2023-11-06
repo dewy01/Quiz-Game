@@ -36,7 +36,7 @@ namespace QuizGame.Model
             }
         }
 
-        public void StartGame(int timeLimitSeconds)
+        public string StartGame(int timeLimitSeconds)
         {
             Console.WriteLine("Witaj w Quizie!");
 
@@ -64,16 +64,21 @@ namespace QuizGame.Model
                 Console.ReadKey();
                 Console.Clear();
             }
-            if(score/questions.Count == 1)
+            if(questions.Count != 0 && score / questions.Count == 1)
             {
                 Animations.PlayWinAnimation();
             }
-            else
+            else if(questions.Count != 0)
             {
                 Console.WriteLine($"Koniec quizu. Twój wynik to: {score}/{questions.Count}");
             }
-            Console.WriteLine("Naciśnij dowolny klawisz, aby zamknąć program...");
+            else
+            {
+                Console.WriteLine($"Błąd podczas ładowania quizu");
+            }
+            Console.WriteLine("Naciśnij dowolny klawisz, aby przejść dalej...");
             Console.ReadKey();
+            return $"{score}/{questions.Count}";
         }
 
         private int userChoiceResult;
@@ -86,10 +91,13 @@ namespace QuizGame.Model
             {
                 Console.Clear();
                 Console.WriteLine($"Pytanie: {question.Content}\n");
+                Console.WriteLine($"Czas na odpowiedź na to pytanie: {5 - stopwatch.Elapsed.TotalSeconds:F0} sekundy");
+                Console.WriteLine();
+
 
                 for (int i = 0; i < question.Options.Count; i++)
                 {
-                    Console.ForegroundColor = (i == selectedOptionIndex) ? ConsoleColor.Gray : ConsoleColor.White;
+                    Console.BackgroundColor = (i == selectedOptionIndex) ? ConsoleColor.DarkGray : ConsoleColor.Black;
                     Console.WriteLine($"{i + 1}. {question.Options[i]}");
                     Console.ResetColor();
                 }
@@ -112,41 +120,6 @@ namespace QuizGame.Model
 
             } while (true);
         }
-
-        /*
-        private void GetUserChoiceInBackground(System.Diagnostics.Stopwatch stopwatch, Question question)
-        {
-            Console.WriteLine($"Pytanie: {question.Content}\n");
-
-            for (int i = 0; i < question.Options.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {question.Options[i]}");
-            }
-
-            Console.Write("Wybierz odpowiedź (podaj numer): ");
-            int userChoice;
-            while (!int.TryParse(Console.ReadLine(), out userChoice) || userChoice < 1 || userChoice > 4)
-            {
-                Console.WriteLine("Nieprawidłowy wybór. Wybierz ponownie.");
-            }
-
-            userChoiceResult = userChoice;
-            stopwatch.Stop();
-        }
-
-        private void DisplayQuestion(Question question)
-        {
-            Console.WriteLine($"Pytanie: {question.Content}\n");
-
-            for (int i = 0; i < question.Options.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {question.Options[i]}");
-            }
-
-            Console.Write("Wybierz odpowiedź (podaj numer): ");
-        }
-        */
-
         private void ProcessUserChoice(int userChoice, Question question)
         {
             if (question.IsCorrect(userChoice))

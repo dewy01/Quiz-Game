@@ -31,5 +31,7 @@ namespace QuizGame.Model
                 Console.WriteLine("Nieprawidłowy indeks quizu.");
             }
         }
+
+
     }
 }
