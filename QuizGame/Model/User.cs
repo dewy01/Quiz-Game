@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace QuizGame.Model
 {
@@ -16,20 +17,28 @@ namespace QuizGame.Model
 
         public void AddPlayedQuiz(string quizName, string score)
         {
-            PlayedQuizzes.Add(new PlayedQuiz(quizName, score));
+            string commonPath = "../../Data/";
+            string fileName = Path.GetFileNameWithoutExtension(quizName.Substring(commonPath.Length));
+            PlayedQuizzes.Add(new PlayedQuiz(fileName, score));
         }
 
         public void DisplayPlayedQuizzes()
         {
+            Console.Clear();
+            Program.PrintCentered("╔══════════════════════════════════════════════════════════╗", false);
+            Program.PrintCentered($"║     Historia rozegranych quizów dla użytkownika {UserName}     ║", false);
+            Program.PrintCentered("╚══════════════════════════════════════════════════════════╝", false);
+
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Historia rozegranych quizów dla użytkownika {UserName}:");
+            Program.PrintCentered("Quiz | Wynik",false);
             Console.ResetColor();
 
             foreach (var playedQuiz in PlayedQuizzes)
             {
-                Console.WriteLine($"Quiz: {playedQuiz.QuizName}, Wynik: {playedQuiz.Score}");
+                Program.PrintCentered($"{playedQuiz.QuizName,-5} | {playedQuiz.Score}",false);
             }
         }
+
     }
 
     public class PlayedQuiz

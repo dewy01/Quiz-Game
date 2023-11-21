@@ -9,6 +9,19 @@ namespace QuizGame.View
 {
     public class Animations
     {
+
+        public static string asciiArt = @"
+$$$$$$$\  $$\   $$\ $$$$$$\ $$$$$$$$\  $$$$$$\  $$\      $$\  $$$$$$\  $$\   $$\ $$$$$$\ $$$$$$$$\ 
+$$  __$$\ $$ |  $$ |\_$$  _|\____$$  |$$  __$$\ $$ | $\  $$ |$$  __$$\ $$$\  $$ |\_$$  _|$$  _____|
+$$ /  $$ |$$ |  $$ |  $$ |      $$  / $$ /  $$ |$$ |$$$\ $$ |$$ /  $$ |$$$$\ $$ |  $$ |  $$ |      
+$$ |  $$ |$$ |  $$ |  $$ |     $$  /  $$ |  $$ |$$ $$ $$\$$ |$$$$$$$$ |$$ $$\$$ |  $$ |  $$$$$\    
+$$ |  $$ |$$ |  $$ |  $$ |    $$  /   $$ |  $$ |$$$$  _$$$$ |$$  __$$ |$$ \$$$$ |  $$ |  $$  __|   
+$$ $$\$$ |$$ |  $$ |  $$ |   $$  /    $$ |  $$ |$$$  / \$$$ |$$ |  $$ |$$ |\$$$ |  $$ |  $$ |      
+\$$$$$$ / \$$$$$$  |$$$$$$\ $$$$$$$$\  $$$$$$  |$$  /   \$$ |$$ |  $$ |$$ | \$$ |$$$$$$\ $$$$$$$$\ 
+ \___$$$\  \______/ \______|\________| \______/ \__/     \__|\__|  \__|\__|  \__|\______|\________|
+     \___|                                                                                         
+";
+
         public static void Intro()
         {
             int screenWidth = Console.WindowWidth;
@@ -106,5 +119,50 @@ namespace QuizGame.View
             Console.ResetColor();
             Console.Clear();
         }
+
+
+
+        public static void StartAnimation()
+        {
+            var lines = asciiArt.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            var totalFrames = lines[0].Length;
+            var frameDuration = 50; 
+            for (var currentFrame = 0; currentFrame < totalFrames; currentFrame++)
+            {
+                UpdateAsciiArt(lines, currentFrame);
+                Thread.Sleep(frameDuration);
+            }
+            Thread.Sleep(1000);
+            Console.Clear();
+        }
+
+        private static void UpdateAsciiArt(string[] lines, int currentFrame)
+        {
+            var horizontalSpaces = (Console.WindowWidth - lines[0].Length) / 2;
+
+            var verticalSpaces = (Console.WindowHeight - lines.Length) / 2;
+
+            var displayText = new string[lines.Length + verticalSpaces];
+
+            for (int i = 0; i < verticalSpaces; i++)
+            {
+                displayText[i] = new string(' ', Console.WindowWidth);
+            }
+            for (var i = 0; i < lines.Length; i++)
+            {
+                if (currentFrame < lines[i].Length)
+                {
+                    displayText[i + verticalSpaces] = new string(' ', horizontalSpaces) + lines[i].Substring(0, currentFrame + 1);
+                }
+                else
+                {
+                    displayText[i + verticalSpaces] = new string(' ', horizontalSpaces) + lines[i];
+                }
+            }
+            Console.Clear();
+            Console.WriteLine(string.Join(Environment.NewLine, displayText));
+        }
     }
 }
+
+

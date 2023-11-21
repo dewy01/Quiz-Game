@@ -10,15 +10,21 @@ namespace QuizGame.Controller
 {
     public class QuizCreator
     {
-        public Quiz CreateNewQuiz()
+        public Quiz CreateNewQuiz(string quizName)
         {
             Quiz newQuiz = new Quiz();
-            Console.WriteLine("Podaj pytania dla nowego quizu. Aby zakończyć, naciśnij Enter bez wpisywania treści pytania.");
 
             while (true)
             {
-                Console.WriteLine("Nowe pytanie:");
-                string content = Console.ReadLine();
+                Console.Clear();
+                Program.PrintCentered("╔════════════════════════════════════════════════╗", false);
+                Program.PrintCentered($"             Nowy Quiz: {quizName}                ", false);
+                Program.PrintCentered("╚════════════════════════════════════════════════╝", false);
+                Console.WriteLine();
+                Program.PrintCentered("Podaj pytania dla nowego quizu. Aby zakończyć, naciśnij Enter bez wpisywania treści pytania.", false);
+                Console.WriteLine();
+                string content = Program.ReadCenteredInput("Nowe pytanie: ");
+                Console.WriteLine();
 
                 if (string.IsNullOrWhiteSpace(content))
                     break;
@@ -26,16 +32,16 @@ namespace QuizGame.Controller
                 List<string> options = new List<string>();
                 for (int i = 0; i < 3; i++)
                 {
-                    Console.WriteLine($"Odpowiedź {i + 1}:");
-                    string option = Console.ReadLine();
+                    string option = Program.ReadCenteredInput($"Odpowiedź {i + 1}:");
+                    Console.WriteLine();
                     options.Add(option);
                 }
 
-                Console.WriteLine("Podaj numer poprawnej odpowiedzi (1-3):");
+                Program.PrintCentered("Podaj numer poprawnej odpowiedzi (1-3):", false);
                 int correctOptionIndex;
-                while (!int.TryParse(Console.ReadLine(), out correctOptionIndex) || correctOptionIndex < 1 || correctOptionIndex > 3)
+                while (!int.TryParse(Program.ReadCenteredInput(""), out correctOptionIndex) || correctOptionIndex < 1 || correctOptionIndex > 3)
                 {
-                    Console.WriteLine("Nieprawidłowy numer. Podaj ponownie:");
+                    Program.PrintCentered("Nieprawidłowy numer. Podaj ponownie:", false);
                 }
 
                 newQuiz.AddQuestion(new Question(content, options, correctOptionIndex - 1));

@@ -36,100 +36,114 @@ namespace QuizGame.Model
             }
         }
 
-        public string StartGame(int timeLimitSeconds)
+ public string StartGame(int timeLimitSeconds)
+{
+    Console.Clear();
+            Program.PrintCentered("╔══════════════════════════════════════════════════╗", false);
+            Program.PrintCentered("║               Witaj w Quizie!                   ║", false);
+            Program.PrintCentered("╚══════════════════════════════════════════════════╝", false);
+
+    foreach (var question in questions)
+    {
+
+        System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+        var inputThread = new Thread(() => GetUserChoiceInBackground(stopwatch, question));
+        inputThread.Start();
+
+        if (inputThread.Join(TimeSpan.FromSeconds(timeLimitSeconds)))
         {
-            Console.WriteLine("Witaj w Quizie!");
+            int userChoice = userChoiceResult;
+            ProcessUserChoice(userChoice, question);
+            Console.ReadKey();
+        }
+        else
+        {
+                    Program.PrintCentered("╔══════════════════════════════════════════════════╗", false);
+                    Program.PrintCentered("║              Czas na odpowiedź minął.            ║", false);
+                    Program.PrintCentered("║          Kliknij 2xENTER aby przejść dalej       ║", false);
+                    Program.PrintCentered("╚══════════════════════════════════════════════════╝", false);
+                    stopwatch.Stop();
+                    Console.ReadKey();
+                }
 
-            foreach (var question in questions)
+    }
+
+    Console.Clear();
+    if (questions.Count != 0 && score / questions.Count == 1)
+    {
+        Animations.PlayWinAnimation();
+    }
+            else if (questions.Count != 0)
             {
-                Console.WriteLine($"Czas na odpowiedź na to pytanie: {timeLimitSeconds} sekundy");
-
-                System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
-
-                //DisplayQuestion(question);
-
-                var inputThread = new Thread(() => GetUserChoiceInBackground(stopwatch,question));
-                inputThread.Start();
-
-                if (inputThread.Join(TimeSpan.FromSeconds(timeLimitSeconds)))
-                {
-                    int userChoice = userChoiceResult;
-                    ProcessUserChoice(userChoice, question);
-                }
-                else
-                {
-                    Console.WriteLine("\nCzas na odpowiedź minął. Niestety nie udało się odpowiedzieć w określonym czasie.");
-                }
-                stopwatch.Stop();
-                Console.ReadKey();
                 Console.Clear();
+                Program.PrintCentered("╔════════════════════════════════════════════╗", false);
+                Program.PrintCentered("║            Koniec quizu. Wyniki:           ║", false);
+                Program.PrintCentered($"║             Twój wynik to: {score}/{questions.Count}             ║", false);
+                Program.PrintCentered("╚════════════════════════════════════════════╝", false);
             }
-            if(questions.Count != 0 && score / questions.Count == 1)
-            {
-                Animations.PlayWinAnimation();
-            }
-            else if(questions.Count != 0)
-            {
-                Console.WriteLine($"Koniec quizu. Twój wynik to: {score}/{questions.Count}");
-            }
+
             else
             {
-                Console.WriteLine($"Błąd podczas ładowania quizu");
-            }
-            Console.WriteLine("Naciśnij dowolny klawisz, aby przejść dalej...");
-            Console.ReadKey();
-            return $"{score}/{questions.Count}";
-        }
+                Program.PrintCentered("Błąd podczas ładowania quizu", false);
+    }
 
-        private int userChoiceResult;
-        private void GetUserChoiceInBackground(System.Diagnostics.Stopwatch stopwatch, Question question)
+            Program.PrintCentered("Naciśnij dowolny klawisz, aby przejść dalej...", false);
+    Console.ReadKey();
+    return $"{score}/{questions.Count}";
+}
+
+private int userChoiceResult;
+private void GetUserChoiceInBackground(System.Diagnostics.Stopwatch stopwatch, Question question)
+{
+    int userChoice = 1; // Domyślna opcja
+    int selectedOptionIndex = 0;
+
+    do
+    {
+        Console.Clear();
+        Program.PrintCentered("╔══════════════════════════════════════════════════╗", false);
+                Program.PrintCentered($"             Pytanie: {question.Content}               ", false);
+                Program.PrintCentered($"     Czas na odpowiedź na to pytanie: {5 - stopwatch.Elapsed.TotalSeconds:F0} sekundy     ", false);
+                Program.PrintCentered("╚══════════════════════════════════════════════════╝", false);
+        Console.WriteLine();
+
+        for (int i = 0; i < question.Options.Count; i++)
         {
-            int userChoice = 1; // Domyślna opcja
-            int selectedOptionIndex = 0;
-
-            do
-            {
-                Console.Clear();
-                Console.WriteLine($"Pytanie: {question.Content}\n");
-                Console.WriteLine($"Czas na odpowiedź na to pytanie: {5 - stopwatch.Elapsed.TotalSeconds:F0} sekundy");
-                Console.WriteLine();
-
-
-                for (int i = 0; i < question.Options.Count; i++)
-                {
-                    Console.BackgroundColor = (i == selectedOptionIndex) ? ConsoleColor.DarkGray : ConsoleColor.Black;
-                    Console.WriteLine($"{i + 1}. {question.Options[i]}");
-                    Console.ResetColor();
-                }
-
-                ConsoleKeyInfo key = Console.ReadKey(true);
-                switch (key.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        selectedOptionIndex = (selectedOptionIndex > 0) ? selectedOptionIndex - 1 : question.Options.Count - 1;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        selectedOptionIndex = (selectedOptionIndex < question.Options.Count - 1) ? selectedOptionIndex + 1 : 0;
-                        break;
-                    case ConsoleKey.Enter:
-                        userChoice = selectedOptionIndex + 1;
-                        userChoiceResult = userChoice;
-                        stopwatch.Stop();
-                        return;
-                }
-
-            } while (true);
+            Console.BackgroundColor = (i == selectedOptionIndex) ? ConsoleColor.DarkGray : ConsoleColor.Black;
+                    Program.PrintCentered($"{question.Options[i]}", selectedOptionIndex == i);
+            Console.ResetColor();
         }
+
+        ConsoleKeyInfo key = Console.ReadKey(true);
+        switch (key.Key)
+        {
+            case ConsoleKey.UpArrow:
+                selectedOptionIndex = (selectedOptionIndex > 0) ? selectedOptionIndex - 1 : question.Options.Count - 1;
+                break;
+            case ConsoleKey.DownArrow:
+                selectedOptionIndex = (selectedOptionIndex < question.Options.Count - 1) ? selectedOptionIndex + 1 : 0;
+                break;
+            case ConsoleKey.Enter:
+                userChoice = selectedOptionIndex + 1;
+                userChoiceResult = userChoice;
+                stopwatch.Stop();
+                return;
+        }
+
+    } while (true);
+}
+
         private void ProcessUserChoice(int userChoice, Question question)
         {
             if (question.IsCorrect(userChoice))
             {
-                Console.WriteLine("Poprawna odpowiedź!\n");
+                Program.PrintCentered("Poprawna odpowiedź!\n",false);
                 score++;
             }
             else
             {
-                Console.WriteLine($"Błędna odpowiedź. Prawidłowa odpowiedź to: {question.Options[question.CorrectOptionIndex]}\n");
+                Program.PrintCentered($"Błędna odpowiedź. Prawidłowa odpowiedź to: {question.Options[question.CorrectOptionIndex]}\n",false);
             }
         }
     }

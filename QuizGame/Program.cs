@@ -12,9 +12,8 @@ namespace QuizGame
 {
     internal class Program
     {
-        static void Main(string[] args) { 
-        
-            Animations.Intro();
+        static void Main(string[] args) {
+            Animations.StartAnimation();
             string folderPath = "../../Data/";
             var fileList = new List<string>();
             User user = new User("Test");
@@ -23,24 +22,18 @@ namespace QuizGame
             do
             {
                 Console.Clear();
-                Console.WriteLine("Wybierz opcję:");
-                Console.BackgroundColor = (selectedOptionIndex == 0) ? ConsoleColor.DarkGray : ConsoleColor.Black;
-                Console.WriteLine("1. Zagraj");
-                Console.ResetColor();
-                Console.BackgroundColor = (selectedOptionIndex == 1) ? ConsoleColor.DarkGray : ConsoleColor.Black;
-                Console.WriteLine("2. Zrób nowy quiz");
-                Console.ResetColor();
-                Console.BackgroundColor = (selectedOptionIndex == 2) ? ConsoleColor.DarkGray : ConsoleColor.Black;
-                Console.WriteLine("3. Usuń quiz");
-                Console.ResetColor();
-                Console.BackgroundColor = (selectedOptionIndex == 3) ? ConsoleColor.DarkGray : ConsoleColor.Black;
-                Console.WriteLine("4. Wyświetl historię");
-                Console.ResetColor();
-                Console.BackgroundColor = (selectedOptionIndex == 4) ? ConsoleColor.DarkGray : ConsoleColor.Black;
-                Console.WriteLine("5. Wyjdź");
-                Console.ResetColor();
+                PrintCentered("╔═══════════════════════════════════╗", selectedOptionIndex == -1);
+                PrintCentered("║            Wybierz opcję:         ║", selectedOptionIndex == -1);
+                PrintCentered("║                                   ║", selectedOptionIndex == -1);
+                PrintCentered($"║  {((selectedOptionIndex == 0) ? ">" : " ")} 1. Zagraj                      ║", selectedOptionIndex == 0);
+                PrintCentered($"║  {((selectedOptionIndex == 1) ? ">" : " ")} 2. Zrób nowy quiz              ║", selectedOptionIndex == 1);
+                PrintCentered($"║  {((selectedOptionIndex == 2) ? ">" : " ")} 3. Usuń quiz                   ║", selectedOptionIndex == 2);
+                PrintCentered($"║  {((selectedOptionIndex == 3) ? ">" : " ")} 4. Wyświetl historię           ║", selectedOptionIndex == 3);
+                PrintCentered($"║  {((selectedOptionIndex == 4) ? ">" : " ")} 5. Wyjdź                       ║", selectedOptionIndex == 4);
+                PrintCentered("║                                   ║", selectedOptionIndex == -1);
+                PrintCentered("╚═══════════════════════════════════╝", selectedOptionIndex == -1);
 
-                ConsoleKeyInfo key = Console.ReadKey();
+                ConsoleKeyInfo key = Console.ReadKey(true);
                 switch (key.Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -80,60 +73,66 @@ namespace QuizGame
         {
             var fileList = new List<string>();
             int selectedFileIndex = 0;
+            int confirmationIndex = 0; // 0 - Tak, 1 - Nie
+            string commonPath = "../../Data/";
 
             try
             {
                 string[] files = Directory.GetFiles(folderPath);
                 Console.Clear();
-                Console.WriteLine("Lista plików:");
-                int i = 1;
-                foreach (var file in files)
+
+                do
                 {
-                    Console.WriteLine($"Plik nr. {i}. {file}");
-                    i++;
-                }
-                fileList = files.ToList();
+                    Console.Clear();
+                    PrintCentered("╔═══════════════════════════════════╗", false);
+                    PrintCentered("║            Lista plików:          ║", false);
+                    PrintCentered("╚═══════════════════════════════════╝", false);
+
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(files[i].Substring(commonPath.Length));
+                        PrintCentered($"{((i == selectedFileIndex) ? ">" : " ")} Plik nr. {i + 1}. {fileName}", selectedFileIndex==i);
+                    }
+
+                    PrintCentered("╔═══════════════════════════════════╗", false);
+                    PrintCentered($"║   Czy na pewno chcesz rozpocząć?  ║", false);
+                    PrintCentered($"║            {((confirmationIndex == 0) ? "[Tak]  Nie" : "Tak  [Nie]")}             ║", false);
+                    PrintCentered("╚═══════════════════════════════════╝", false);
+
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            selectedFileIndex = Math.Max(0, selectedFileIndex - 1);
+                            break;
+                        case ConsoleKey.DownArrow:
+                            selectedFileIndex = Math.Min(files.Length - 1, selectedFileIndex + 1);
+                            break;
+                        case ConsoleKey.RightArrow:
+                            confirmationIndex = 1;
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            confirmationIndex = 0;
+                            break;
+                        case ConsoleKey.Enter:
+                            if (confirmationIndex == 0)
+                            {
+                                string score = LoadAndStartQuiz(files[selectedFileIndex]);
+                                user.AddPlayedQuiz(files[selectedFileIndex], score);
+                                return;
+                            }
+                            return;
+                    }
+
+                } while (true);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Wystąpił błąd: {ex.Message}");
                 return;
             }
-
-            Console.WriteLine("Poruszaj się strzałkami (góra/dół), Enter aby wybrać quiz:");
-
-            do
-            {
-                ConsoleKeyInfo key = Console.ReadKey();
-                Console.Clear();
-
-                switch (key.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        selectedFileIndex = Math.Max(0, selectedFileIndex - 1);
-                        break;
-                    case ConsoleKey.DownArrow:
-                        selectedFileIndex = Math.Min(fileList.Count - 1, selectedFileIndex + 1);
-                        break;
-                    case ConsoleKey.Enter:
-                        string score = LoadAndStartQuiz(fileList.ElementAt(selectedFileIndex));
-                        user.AddPlayedQuiz(fileList.ElementAt(selectedFileIndex), score);
-                        return;
-                }
-
-                Console.WriteLine("Lista plików:");
-                for (int i = 0; i < fileList.Count; i++)
-                {
-                    if (i == selectedFileIndex)
-                        Console.BackgroundColor = ConsoleColor.DarkGray;
-
-                    Console.WriteLine($"Plik nr. {i + 1}. {fileList[i]}");
-                    Console.ResetColor();
-                }
-
-                Console.WriteLine("Poruszaj się strzałkami (góra/dół), Enter aby wybrać quiz:");
-            } while (true);
         }
+
 
         static string LoadAndStartQuiz(string filePath)
         {
@@ -155,9 +154,15 @@ namespace QuizGame
             QuizDataHandler dataHandler = new QuizDataHandler();
             QuizCreator quizCreator = new QuizCreator();
 
-            Console.WriteLine("Podaj nazwę nowego Quizu");
-            string quizpath = folderPath + Console.ReadLine() + ".txt";
-            dataHandler.SaveQuestions(quizCreator.CreateNewQuiz(), quizpath);
+            Console.Clear();
+            Program.PrintCentered("╔════════════════════════════════════════════════╗", false);
+            Program.PrintCentered("║           Tworzenie Nowego Quizu               ║", false);
+            Program.PrintCentered("╚════════════════════════════════════════════════╝", false);
+
+            string quizName = ReadCenteredInput("Podaj nazwę nowego Quizu:");
+            string quizPath = folderPath + quizName + ".txt";
+
+            dataHandler.SaveQuestions(quizCreator.CreateNewQuiz(quizName), quizPath);
         }
 
         static void DeleteQuiz(string folderPath)
@@ -165,72 +170,63 @@ namespace QuizGame
             var fileList = new List<string>();
             int selectedFileIndex = 0;
             int confirmationIndex = 0; // 0 - Tak, 1 - Nie
+            string commonPath = "../../Data/";
 
             try
             {
                 string[] files = Directory.GetFiles(folderPath);
                 Console.Clear();
-                Console.WriteLine("Lista plików:");
-                int i = 1;
-                foreach (var file in files)
+
+                do
                 {
-                    Console.WriteLine($"Plik nr. {i}. {file}");
-                    i++;
-                }
-                fileList = files.ToList();
+                    Console.Clear();
+                    PrintCentered("╔═══════════════════════════════════╗", false);
+                    PrintCentered("║            Lista plików:          ║", false);
+                    PrintCentered("╚═══════════════════════════════════╝", false);
+
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(files[i].Substring(commonPath.Length));
+                        PrintCentered($"{((i == selectedFileIndex) ? ">" : " ")} Plik nr. {i + 1}. {fileName}", selectedFileIndex == i);
+                    }
+
+                    PrintCentered("╔═══════════════════════════════════╗", false);
+                    PrintCentered($"║  Czy na pewno chcesz usunąć plik? ║", false);
+                    PrintCentered($"║            {((confirmationIndex == 0) ? "[Tak]  Nie" : "Tak  [Nie]")}             ║", false);
+                    PrintCentered("╚═══════════════════════════════════╝", false);
+
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            selectedFileIndex = Math.Max(0, selectedFileIndex - 1);
+                            break;
+                        case ConsoleKey.DownArrow:
+                            selectedFileIndex = Math.Min(files.Length - 1, selectedFileIndex + 1);
+                            break;
+                        case ConsoleKey.RightArrow:
+                            confirmationIndex = 1;
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            confirmationIndex = 0;
+                            break;
+                        case ConsoleKey.Enter:
+                            if (confirmationIndex == 0)
+                            {
+                                DeleteSelectedQuiz(files[selectedFileIndex]);
+                            }
+                            return;
+                    }
+
+                } while (true);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Wystąpił błąd: {ex.Message}");
                 return;
             }
-
-            Console.WriteLine("Poruszaj się strzałkami (góra/dół), Enter aby usunąć quiz:");
-
-            do
-            {
-                ConsoleKeyInfo key = Console.ReadKey();
-                Console.Clear();
-
-                switch (key.Key)
-                {
-                    case ConsoleKey.RightArrow:
-                            confirmationIndex = 1;
-                        break;
-                    case ConsoleKey.UpArrow:
-                        selectedFileIndex = Math.Max(0, selectedFileIndex - 1);
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        confirmationIndex = 0;
-                        break;
-                      
-                    case ConsoleKey.DownArrow:               
-                        selectedFileIndex = Math.Min(fileList.Count - 1, selectedFileIndex + 1);
-                        break;
-                    case ConsoleKey.Enter:
-                        if (confirmationIndex == 0)
-                        {
-                            DeleteSelectedQuiz(fileList.ElementAt(selectedFileIndex));
-                        }
-                        return;
-                }
-
-                Console.WriteLine("Lista plików:");
-                for (int i = 0; i < fileList.Count; i++)
-                {
-                    if (i == selectedFileIndex)
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkGray;
-                    }
-
-                    Console.WriteLine($"Plik nr. {i + 1}. {fileList[i]}");
-                    Console.ResetColor();
-                }
-
-                Console.WriteLine("Czy na pewno chcesz usunąć plik?");
-                Console.Write(confirmationIndex == 0 ? "[Tak]  Nie" : "Tak  [Nie]");
-            } while (true);
         }
+
 
         static void DeleteSelectedQuiz(string filePath)
         {
@@ -250,35 +246,54 @@ namespace QuizGame
             DisplayHistoryStarWars(user);
             Console.Clear();
             user.DisplayPlayedQuizzes();
-            Console.WriteLine("Naciśnij dowolny klawisz, aby wrócić do menu...");
+
+            PrintCentered("Naciśnij dowolny klawisz, aby wrócić do menu...", false);
             Console.ReadKey();
         }
 
         static void DisplayHistoryStarWars(User user)
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Historia Quizów:");
-            Console.ResetColor();
 
             var quizzes = user.PlayedQuizzes;
 
             for (int i = quizzes.Count - 1; i >= 0; i--)
             {
                 Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Historia Quizów:");
-                Console.ResetColor();
+                
+                PrintCentered("╔══════════════════════════════════════╗", false);
+                PrintCentered("║           Historia Quizów            ║", false);
+                PrintCentered("╚══════════════════════════════════════╝", false);
 
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine($"Quiz: {quizzes[i].QuizName}");
-                Console.WriteLine($"Wynik: {quizzes[i].Score}");
+                
+                PrintCentered($"Quiz: {quizzes[i].QuizName}",false);
+                PrintCentered($"Wynik: {quizzes[i].Score}", false);
                 Console.ResetColor();
 
                 Thread.Sleep(1000); // Czas trwania pojedynczego wpisu w sekundach
             }
-
         }
+
+
+        public static void PrintCentered(string text, bool isSelected)
+        {
+            int width = Console.WindowWidth;
+            int leftPadding = (width - text.Length) / 2;
+
+            Console.Write(new string(' ', leftPadding));
+            Console.BackgroundColor = isSelected ? ConsoleColor.DarkGray : ConsoleColor.Black;
+            Console.Write(text);
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        public static string ReadCenteredInput(string prompt)
+        {
+            Program.PrintCentered(prompt, false);
+            int leftPadding = (Console.WindowWidth - prompt.Length) / 2;
+            Console.SetCursorPosition(leftPadding, Console.CursorTop);
+            return Console.ReadLine();
+        }
+
 
     }
 }
