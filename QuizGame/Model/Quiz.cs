@@ -70,7 +70,7 @@ namespace QuizGame.Model
     }
 
     Console.Clear();
-    if (questions.Count != 0 && score / questions.Count == 1)
+    if (questions.Count != 0 && (score / questions.Count) == 1)
     {
         Animations.PlayWinAnimation();
     }

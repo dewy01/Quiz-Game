@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Media;
+using System.IO;
+using static System.Net.WebRequestMethods;
 
 namespace QuizGame.View
 {
@@ -68,6 +71,10 @@ $$ $$\$$ |$$ |  $$ |  $$ |   $$  /    $$ |  $$ |$$$  / \$$$ |$$ |  $$ |$$ |\$$$ 
         public static void PlayWinAnimation()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
+            string musicFile = "../../Sound/victory2.wav";
+            SoundPlayer musicPlayer = new SoundPlayer();
+            musicPlayer.SoundLocation = musicFile;
+            musicPlayer.Play();
 
             for (int i = 0; i < 5; i++)
             {
@@ -117,6 +124,7 @@ $$ $$\$$ |$$ |  $$ |  $$ |   $$  /    $$ |  $$ |$$$  / \$$$ |$$ |  $$ |$$ |\$$$ 
             Thread.Sleep(1500);
 
             Console.ResetColor();
+            musicPlayer.Stop();
             Console.Clear();
         }
 
