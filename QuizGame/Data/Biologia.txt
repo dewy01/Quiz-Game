@@ -1,5 +1,15 @@
 Ile nóg ma koń?
-0. Jedną
-0. Dwie
-0. Cztery
+1. Jedną
+2. Dwie
+3. Cztery
 3
+Czy delfin to ryba?
+1. Tak
+2. Nie
+3. Tak i nie
+2
+Które zwierze szczeka?
+1. Kot
+2. Pies
+3. Chomik
+2

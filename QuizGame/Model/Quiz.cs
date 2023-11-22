@@ -12,6 +12,7 @@ namespace QuizGame.Model
     {
         public List<Question> questions;
         private int score;
+        private bool stopUserChoiceThread = false;
 
         public Quiz()
         {
@@ -40,13 +41,13 @@ namespace QuizGame.Model
 {
     Console.Clear();
             Program.PrintCentered("╔══════════════════════════════════════════════════╗", false);
-            Program.PrintCentered("║               Witaj w Quizie!                   ║", false);
+            Program.PrintCentered("║                  Witaj w Quizie!                 ║", false);
             Program.PrintCentered("╚══════════════════════════════════════════════════╝", false);
-
+            Thread.Sleep(1000);
     foreach (var question in questions)
     {
-
-        System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
+                stopUserChoiceThread = false;
+                System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
         var inputThread = new Thread(() => GetUserChoiceInBackground(stopwatch, question));
         inputThread.Start();
@@ -59,13 +60,14 @@ namespace QuizGame.Model
         }
         else
         {
+                    stopUserChoiceThread = true;
                     Program.PrintCentered("╔══════════════════════════════════════════════════╗", false);
                     Program.PrintCentered("║              Czas na odpowiedź minął.            ║", false);
                     Program.PrintCentered("║          Kliknij 2xENTER aby przejść dalej       ║", false);
                     Program.PrintCentered("╚══════════════════════════════════════════════════╝", false);
                     stopwatch.Stop();
                     Console.ReadKey();
-                }
+        }
 
     }
 
@@ -103,20 +105,24 @@ private void GetUserChoiceInBackground(System.Diagnostics.Stopwatch stopwatch, Q
     {
         Console.Clear();
         Program.PrintCentered("╔══════════════════════════════════════════════════╗", false);
-                Program.PrintCentered($"             Pytanie: {question.Content}               ", false);
+                Program.PrintCentered($"                 {question.Content}               ", false);
                 Program.PrintCentered($"     Czas na odpowiedź na to pytanie: {5 - stopwatch.Elapsed.TotalSeconds:F0} sekundy     ", false);
                 Program.PrintCentered("╚══════════════════════════════════════════════════╝", false);
         Console.WriteLine();
 
         for (int i = 0; i < question.Options.Count; i++)
         {
-            Console.BackgroundColor = (i == selectedOptionIndex) ? ConsoleColor.DarkGray : ConsoleColor.Black;
+            
                     Program.PrintCentered($"{question.Options[i]}", selectedOptionIndex == i);
-            Console.ResetColor();
+            
         }
 
         ConsoleKeyInfo key = Console.ReadKey(true);
-        switch (key.Key)
+                if (stopUserChoiceThread)
+                {
+                    return;
+                }
+                switch (key.Key)
         {
             case ConsoleKey.UpArrow:
                 selectedOptionIndex = (selectedOptionIndex > 0) ? selectedOptionIndex - 1 : question.Options.Count - 1;

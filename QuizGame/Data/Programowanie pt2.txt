@@ -1,0 +1,15 @@
+Jaki typ jest liczbowy?
+1. float
+2. char
+3. bool
+1
+Który typ określa liczbe całkowitą?
+1. decimal
+2. int
+3. float
+2
+Która operacja wykona kod przed sprawdzeniem?
+1. while
+2. do while
+3. for
+2

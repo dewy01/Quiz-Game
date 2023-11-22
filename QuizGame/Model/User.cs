@@ -26,7 +26,7 @@ namespace QuizGame.Model
         {
             Console.Clear();
             Program.PrintCentered("╔══════════════════════════════════════════════════════════╗", false);
-            Program.PrintCentered($"║     Historia rozegranych quizów dla użytkownika {UserName}     ║", false);
+            Program.PrintCentered($"║    Historia rozegranych quizów dla użytkownika {UserName}     ║", false);
             Program.PrintCentered("╚══════════════════════════════════════════════════════════╝", false);
 
             Console.ForegroundColor = ConsoleColor.Yellow;

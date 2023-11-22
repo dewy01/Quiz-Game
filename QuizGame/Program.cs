@@ -12,11 +12,12 @@ namespace QuizGame
 {
     internal class Program
     {
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
             Animations.StartAnimation();
             string folderPath = "../../Data/";
             var fileList = new List<string>();
-            User user = new User("Test");
+            User user = new User("Gracz");
             int selectedOptionIndex = 0;
 
             do
@@ -27,9 +28,10 @@ namespace QuizGame
                 PrintCentered("║                                   ║", selectedOptionIndex == -1);
                 PrintCentered($"║  {((selectedOptionIndex == 0) ? ">" : " ")} 1. Zagraj                      ║", selectedOptionIndex == 0);
                 PrintCentered($"║  {((selectedOptionIndex == 1) ? ">" : " ")} 2. Zrób nowy quiz              ║", selectedOptionIndex == 1);
-                PrintCentered($"║  {((selectedOptionIndex == 2) ? ">" : " ")} 3. Usuń quiz                   ║", selectedOptionIndex == 2);
-                PrintCentered($"║  {((selectedOptionIndex == 3) ? ">" : " ")} 4. Wyświetl historię           ║", selectedOptionIndex == 3);
-                PrintCentered($"║  {((selectedOptionIndex == 4) ? ">" : " ")} 5. Wyjdź                       ║", selectedOptionIndex == 4);
+                PrintCentered($"║  {((selectedOptionIndex == 2) ? ">" : " ")} 3. Zagraj w losowy quiz        ║", selectedOptionIndex == 2);
+                PrintCentered($"║  {((selectedOptionIndex == 3) ? ">" : " ")} 4. Usuń quiz                   ║", selectedOptionIndex == 3);
+                PrintCentered($"║  {((selectedOptionIndex == 4) ? ">" : " ")} 5. Wyświetl historię           ║", selectedOptionIndex == 4);
+                PrintCentered($"║  {((selectedOptionIndex == 5) ? ">" : " ")} 6. Wyjdź                       ║", selectedOptionIndex == 5);
                 PrintCentered("║                                   ║", selectedOptionIndex == -1);
                 PrintCentered("╚═══════════════════════════════════╝", selectedOptionIndex == -1);
 
@@ -37,10 +39,10 @@ namespace QuizGame
                 switch (key.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        selectedOptionIndex = (selectedOptionIndex > 0) ? selectedOptionIndex - 1 : 4;
+                        selectedOptionIndex = (selectedOptionIndex > 0) ? selectedOptionIndex - 1 : 5;
                         break;
                     case ConsoleKey.DownArrow:
-                        selectedOptionIndex = (selectedOptionIndex < 4) ? selectedOptionIndex + 1 : 0;
+                        selectedOptionIndex = (selectedOptionIndex < 5) ? selectedOptionIndex + 1 : 0;
                         break;
                     case ConsoleKey.Enter:
                         if (selectedOptionIndex == 0)
@@ -53,14 +55,19 @@ namespace QuizGame
                         }
                         else if (selectedOptionIndex == 2)
                         {
-                            DeleteQuiz(folderPath);
+                            RunRandomQuiz(folderPath, user);
                         }
                         else if (selectedOptionIndex == 3)
                         {
-                            DisplayHistory(user);
+                            DeleteQuiz(folderPath);
                         }
                         else if (selectedOptionIndex == 4)
                         {
+                            DisplayHistory(user);
+                        }
+                        else if (selectedOptionIndex == 5)
+                        {
+                            Animations.EndAnimation();
                             Environment.Exit(0);
                         }
                         break;
@@ -130,6 +137,31 @@ namespace QuizGame
             {
                 Console.WriteLine($"Wystąpił błąd: {ex.Message}");
                 return;
+            }
+        }
+
+        static void RunRandomQuiz(string folderPath, User user)
+        {
+            try
+            {
+                string[] files = Directory.GetFiles(folderPath);
+
+                if (files.Length > 0)
+                {
+                    int randomIndex = new Random().Next(0, files.Length);
+                    Console.Clear();
+                    Animations.LoadingAnimation();
+                    string score = LoadAndStartQuiz(files[randomIndex]);
+                    user.AddPlayedQuiz(files[randomIndex], score);
+                }
+                else
+                {
+                    Console.WriteLine("Brak dostępnych quizów do rozegrania.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Wystąpił błąd: {ex.Message}");
             }
         }
 

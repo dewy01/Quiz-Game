@@ -1,0 +1,15 @@
+Jak określić stałą?
+1. var
+2. let
+3. const
+3
+Która deklaracja to instruckja warunkowa?
+1. if
+2. for
+3. while
+1
+Co jest błędne?
+1. char napis = 'Czesc'
+2. string napis = 'czesc'
+3. int liczba = 3
+1
