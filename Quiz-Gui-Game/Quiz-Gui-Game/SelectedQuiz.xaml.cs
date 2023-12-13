@@ -15,12 +15,14 @@ namespace Quiz_Gui_Game
         private Quiz quiz;
         private int currentQuestionIndex = 0;
         private int score = 0;
+        public User user;
 
         private DispatcherTimer timer;
         private int timeLimitSeconds = 10; 
 
-        public SelectedQuiz()
+        public SelectedQuiz(User user)
         {
+            this.user = user;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
@@ -73,6 +75,7 @@ namespace Quiz_Gui_Game
                     NavigationService.GoBack();
                 }
                 MessageBox.Show($"Quiz completed! Score: {quiz.GetScore()}");
+                user.AddPlayedQuiz(FilePath, quiz.GetScore());
                 NavigationService.GoBack();
                 NavigationService.GoBack();
             }

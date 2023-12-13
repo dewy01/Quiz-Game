@@ -8,17 +8,69 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainMenu">
 
-    <Grid Background="LightGray">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg"/>
+        </Grid.Background>
+        
         <StackPanel HorizontalAlignment="center">
-            <Label FontSize="24px">Quizzowanie</Label>
+            <Label FontSize="24px" VerticalAlignment="Center" Content="Quizzowanie"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Zagraj" Click="PlayButton_Click" Margin="2 2 2 2"/>
-            <Button Content="Zrób nowy quiz" Click="CreateQuizButton_Click" Margin="2 2 2 2" />
-            <Button Content="Zagraj w losowy quiz" Click="RandomButton_Click"  Margin="2 2 2 2"/>
-            <Button Content="Usuń quiz" Click="DeleteButton_Click" Margin="2 2 2 2"/>
-            <Button Content="Wyświetl historię"  Margin="2 2 2 2"/>
-            <Button Content="Wyjdź" Click="ExitButton_Click"   Margin="2 2 2 2"/>
+            <Button Content="Zagraj" Click="PlayButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="Padding" Value="10,2,10,3"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Zrób nowy quiz" Click="CreateQuizButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="Padding" Value="10,2,10,3"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Zagraj w losowy quiz" Click="RandomButton_Click"  Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="Padding" Value="10,2,10,3"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Usuń quiz" Click="DeleteButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="Padding" Value="10,2,10,3"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Wyświetl historię" Click="HistoryButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="Padding" Value="10,2,10,3"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Wyjdź" Click="ExitButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="Padding" Value="10,2,10,3"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

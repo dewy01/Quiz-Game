@@ -17,12 +17,14 @@ namespace Quiz_Gui_Game
         private string folderPath = "../../Data/";
         public string[] files;
         public bool isRandom;
+        public User user;
 
-        public RunQuizContent(bool isRandom)
+        public RunQuizContent(bool isRandom, User user)
         {
             InitializeComponent();
             LoadQuizzes();
             this.isRandom = isRandom;
+            this.user = user;
             if (isRandom && files.Length > 0)
             {
                 selectedFileIndex = new Random().Next(0, files.Length);
@@ -92,7 +94,7 @@ namespace Quiz_Gui_Game
 
         private void LoadAndStartQuiz(string filePath)
         {
-            SelectedQuiz selectedQuizPage = new SelectedQuiz();
+            SelectedQuiz selectedQuizPage = new SelectedQuiz(user);
 
             selectedQuizPage.SetFilePath(filePath);
 

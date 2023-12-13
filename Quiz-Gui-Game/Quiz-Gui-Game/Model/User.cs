@@ -17,7 +17,7 @@ namespace Quiz_Gui_Game.Model
             PlayedQuizzes = new List<PlayedQuiz>();
         }
 
-        public void AddPlayedQuiz(string quizName, string score)
+        public void AddPlayedQuiz(string quizName, int score)
         {
             string commonPath = "../../Data/";
             string fileName = System.IO.Path.GetFileNameWithoutExtension(quizName.Substring(commonPath.Length));
@@ -39,9 +39,9 @@ namespace Quiz_Gui_Game.Model
     public class PlayedQuiz
     {
         public string QuizName { get; }
-        public string Score { get; }
+        public int Score { get; }
 
-        public PlayedQuiz(string quizName, string score)
+        public PlayedQuiz(string quizName, int score)
         {
             QuizName = quizName;
             Score = score;

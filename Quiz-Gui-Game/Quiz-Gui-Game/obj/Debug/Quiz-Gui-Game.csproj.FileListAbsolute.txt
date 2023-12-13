@@ -46,3 +46,7 @@ C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\D
 C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\CreateQuestionPage.baml
 C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\DeleteQuizContent.g.cs
 C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\DeleteQuizContent.baml
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\EachQuizPage.g.cs
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\EachQuizPage.baml
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\AllQuizzesPage.g.cs
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\AllQuizzesPage.baml
