@@ -3,22 +3,30 @@ using Quiz_Gui_Game.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using static System.Net.WebRequestMethods;
 
 namespace Quiz_Gui_Game
 {
     public partial class RunQuizContent : Page
     {
-        private int selectedFileIndex = 0;
-        private int confirmationIndex = 0;
+        private int selectedFileIndex = -1;
         private List<QuizInfo> quizzes;
         private string folderPath = "../../Data/";
+        public string[] files;
+        public bool isRandom;
 
-        public RunQuizContent()
+        public RunQuizContent(bool isRandom)
         {
             InitializeComponent();
             LoadQuizzes();
+            this.isRandom = isRandom;
+            if (isRandom && files.Length > 0)
+            {
+                selectedFileIndex = new Random().Next(0, files.Length);
+            }
             UpdateUI();
         }
 
@@ -26,7 +34,7 @@ namespace Quiz_Gui_Game
         {
             try
             {
-                string[] files = Directory.GetFiles(folderPath);
+                files = Directory.GetFiles(folderPath);
                 quizzes = new List<QuizInfo>();
 
                 foreach (var file in files)
@@ -45,8 +53,20 @@ namespace Quiz_Gui_Game
         private void UpdateUI()
         {
             QuizzesListBox.ItemsSource = null;
-            QuizzesListBox.ItemsSource = quizzes;
+
+            if (isRandom)
+            {
+                QuizzesListBox.ItemsSource = QuizzesListBox.ItemsSource = new List<QuizInfo> { quizzes[selectedFileIndex] };
+                QuizzesListBox.IsEnabled = false;
+
+            }
+            else
+            {
+                QuizzesListBox.ItemsSource = quizzes;
+                QuizzesListBox.IsEnabled = true;
+            }
         }
+
 
         private void QuizzesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -55,7 +75,7 @@ namespace Quiz_Gui_Game
 
         private void StartQuizButton_Click(object sender, RoutedEventArgs e)
         {
-            if (confirmationIndex == 0 && selectedFileIndex >= 0 && selectedFileIndex < quizzes.Count)
+            if (selectedFileIndex >= 0 && selectedFileIndex < quizzes.Count)
             {
                 LoadAndStartQuiz(quizzes[selectedFileIndex].FilePath);
             }
@@ -68,12 +88,6 @@ namespace Quiz_Gui_Game
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
-        }
-
-        private void ConfirmationButton_Click(object sender, RoutedEventArgs e)
-        {
-            confirmationIndex = 1 - confirmationIndex;
-            UpdateUI();
         }
 
         private void LoadAndStartQuiz(string filePath)

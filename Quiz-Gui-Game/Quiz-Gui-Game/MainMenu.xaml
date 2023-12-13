@@ -13,12 +13,12 @@
             <Label FontSize="24px">Quizzowanie</Label>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Zagraj" Click="PlayButton_Click"/>
-            <Button Content="Zrób nowy quiz" />
-            <Button Content="Zagraj w losowy quiz"/>
-            <Button Content="Usuń quiz"/>
-            <Button Content="Wyświetl historię"/>
-            <Button Content="Wyjdź"/>
+            <Button Content="Zagraj" Click="PlayButton_Click" Margin="2 2 2 2"/>
+            <Button Content="Zrób nowy quiz"  Margin="2 2 2 2" />
+            <Button Content="Zagraj w losowy quiz" Click="RandomButton_Click"  Margin="2 2 2 2"/>
+            <Button Content="Usuń quiz"  Margin="2 2 2 2"/>
+            <Button Content="Wyświetl historię"  Margin="2 2 2 2"/>
+            <Button Content="Wyjdź" Click="ExitButton_Click"   Margin="2 2 2 2"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -27,7 +27,18 @@ namespace Quiz_Gui_Game
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("RunQuizContent.xaml", UriKind.Relative));
+            RunQuizContent runQuizContent = new RunQuizContent(false);
+            NavigationService.Navigate(runQuizContent);
+        }
+        private void RandomButton_Click(object sender, RoutedEventArgs e)
+        {
+            RunQuizContent runQuizContent = new RunQuizContent(true);
+            NavigationService.Navigate(runQuizContent);
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
