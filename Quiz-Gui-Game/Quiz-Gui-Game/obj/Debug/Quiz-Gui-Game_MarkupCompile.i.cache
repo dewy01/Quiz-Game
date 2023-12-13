@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\dawid\Desktop\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\
 Quiz_Gui_Game
 none
 false
 DEBUG;TRACE
-C:\Users\dawid\Desktop\Quiz-Gui-Game\Quiz-Gui-Game\App.xaml
-4-1986144496
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\App.xaml
+7-1253916308
 
-142131584086
+18-1985719009
 13-1310406943
-MainMenu.xaml;MainWindow.xaml;RunQuizContent.xaml;SelectedQuiz.xaml;
+CreateQuestionPage.xaml;CreateQuizPage.xaml;DeleteQuizContent.xaml;MainMenu.xaml;MainWindow.xaml;RunQuizContent.xaml;SelectedQuiz.xaml;
 
 True
 

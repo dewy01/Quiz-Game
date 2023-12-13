@@ -55,7 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\QuizCreator.cs" />
     <Compile Include="Controller\QuizDataHandler.cs" />
+    <Compile Include="CreateQuestionPage.xaml.cs">
+      <DependentUpon>CreateQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateQuizPage.xaml.cs">
+      <DependentUpon>CreateQuizPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteQuizContent.xaml.cs">
+      <DependentUpon>DeleteQuizContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -69,6 +79,18 @@
     <Compile Include="SelectedQuiz.xaml.cs">
       <DependentUpon>SelectedQuiz.xaml</DependentUpon>
     </Compile>
+    <Page Include="CreateQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateQuizPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteQuizContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

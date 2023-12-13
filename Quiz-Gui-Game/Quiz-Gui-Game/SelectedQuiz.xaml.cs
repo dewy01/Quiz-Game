@@ -21,11 +21,10 @@ namespace Quiz_Gui_Game
 
         public SelectedQuiz()
         {
-            InitializeComponent();
-
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
+            InitializeComponent();
         }
 
         public void SetFilePath(string filePath)
@@ -49,24 +48,24 @@ namespace Quiz_Gui_Game
 
         private void UpdateUI()
         {
-                if (quiz.GetCurrentQuestionIndex() < quiz.GetTotalQuestions())
-            {
+            if (quiz.GetCurrentQuestionIndex() < quiz.GetTotalQuestions())
+              {
                 QuestionLabel.Text = quiz.GetQuestionContent(quiz.GetCurrentQuestionIndex());
 
-                OptionsStackPanel.Children.Clear();
-                foreach (var option in quiz.GetQuestionOptions(quiz.GetCurrentQuestionIndex()))
-                {
-                    RadioButton radioButton = new RadioButton
+                    OptionsStackPanel.Children.Clear();
+                    foreach (var option in quiz.GetQuestionOptions(quiz.GetCurrentQuestionIndex()))
                     {
-                        Content = option,
-                        GroupName = "OptionsGroup",
-                        Margin = new Thickness(0, 5, 0, 0),
-                        Tag = quiz.GetQuestionOptions(quiz.GetCurrentQuestionIndex()).IndexOf(option) + 1
-                    };
-                    OptionsStackPanel.Children.Add(radioButton);
-                }
-                StartTimer();
-            }
+                        RadioButton radioButton = new RadioButton
+                        {
+                            Content = option,
+                            GroupName = "OptionsGroup",
+                            Margin = new Thickness(0, 5, 0, 0),
+                            Tag = quiz.GetQuestionOptions(quiz.GetCurrentQuestionIndex()).IndexOf(option) + 1
+                        };
+                        OptionsStackPanel.Children.Add(radioButton);
+                    }
+                    StartTimer();
+              }
             else
             {
                 if (quiz.GetTotalQuestions() == 0)

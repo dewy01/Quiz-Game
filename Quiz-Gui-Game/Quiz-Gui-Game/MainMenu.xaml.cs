@@ -36,6 +36,19 @@ namespace Quiz_Gui_Game
             NavigationService.Navigate(runQuizContent);
         }
 
+        private void CreateQuizButton_Click(object sender, RoutedEventArgs e)
+        {
+            CreateQuizPage createQuizPage = new CreateQuizPage();
+            NavigationService.Navigate(createQuizPage);
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteQuizContent deleteQuizContent = new DeleteQuizContent();
+            NavigationService.Navigate(deleteQuizContent);
+        }
+
+
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

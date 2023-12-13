@@ -40,3 +40,9 @@ C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\D
 C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\Quiz-Gui-Game.csproj.CoreCompileInputs.cache
 C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\Quiz-Gui-Game.exe
 C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\Quiz-Gui-Game.pdb
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\CreateQuizPage.g.cs
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\CreateQuizPage.baml
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\CreateQuestionPage.g.cs
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\CreateQuestionPage.baml
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\DeleteQuizContent.g.cs
+C:\Users\dawid\Desktop\QuizGame\Quiz-Text-Game\Quiz-Gui-Game\Quiz-Gui-Game\obj\Debug\DeleteQuizContent.baml

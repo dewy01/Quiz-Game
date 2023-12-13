@@ -14,9 +14,9 @@
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Content="Zagraj" Click="PlayButton_Click" Margin="2 2 2 2"/>
-            <Button Content="Zrób nowy quiz"  Margin="2 2 2 2" />
+            <Button Content="Zrób nowy quiz" Click="CreateQuizButton_Click" Margin="2 2 2 2" />
             <Button Content="Zagraj w losowy quiz" Click="RandomButton_Click"  Margin="2 2 2 2"/>
-            <Button Content="Usuń quiz"  Margin="2 2 2 2"/>
+            <Button Content="Usuń quiz" Click="DeleteButton_Click" Margin="2 2 2 2"/>
             <Button Content="Wyświetl historię"  Margin="2 2 2 2"/>
             <Button Content="Wyjdź" Click="ExitButton_Click"   Margin="2 2 2 2"/>
         </StackPanel>
