@@ -40,6 +40,11 @@ namespace Quiz_Gui_Game
             }
             else
             {
+                if (user.PlayedQuizzes.Count > 0)
+                {
+                    AllQuizzesPage allQuizzesPage = new AllQuizzesPage(user);
+                    NavigationService.Navigate(allQuizzesPage);
+                }
                 QuizNameTextBlock.Content = $"Brak historii Quizów";
             }
         }
