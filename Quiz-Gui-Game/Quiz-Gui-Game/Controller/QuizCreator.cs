@@ -19,7 +19,6 @@ namespace Quiz_Gui_Game.Controller
 
         public void AddQuestion(string content, List<string> options, int correctOptionIndex)
         {
-            // Add logic to create and add questions
             newQuiz.AddQuestion(new Question(content, options, correctOptionIndex));
         }
 

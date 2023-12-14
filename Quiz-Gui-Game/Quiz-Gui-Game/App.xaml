@@ -11,6 +11,7 @@
             <Setter Property="BorderThickness" Value="2px"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="Padding" Value="15 2 15 2"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -27,5 +28,47 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="QuizTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="0 5 0 5"/>
+            <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+            <Setter Property="BorderThickness" Value="2px"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="10 2 10 2"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+
+        <Style x:Key="QuizComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Margin" Value="0 5 0 5"/>
+            <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+            <Setter Property="BorderThickness" Value="2px"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="10 2 10 2"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+
+        <Style x:Key="TitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+
+        <Style x:Key="SubtitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+
+        <Style x:Key="ParagraphStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        
     </Application.Resources>
 </Application>

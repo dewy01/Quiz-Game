@@ -57,7 +57,7 @@ namespace Quiz_Gui_Game.Model
                 {
 
                     stopwatch.Stop();
-                    MessageBox.Show($"Time is up! The correct answer for the question:\n\n{question.Content}\n\nis: {question.Options[question.CorrectOptionIndex]}");
+                    MessageBox.Show($"Koniec czasu! Przejdź dalej");
                 }
 
                 questionViewModels.Add(new QuestionViewModel
@@ -83,12 +83,12 @@ namespace Quiz_Gui_Game.Model
                 {
                     if (question.IsCorrect(userChoice))
                     {
-                        MessageBox.Show("Correct!");
+                        MessageBox.Show("Poprawnie!");
                         score++;
                     }
                     else
                     {
-                        MessageBox.Show($"Incorrect! Correct answer: {question.Options[question.CorrectOptionIndex]}");
+                        MessageBox.Show($"Niepoprawna odpowiedź!");
                     }
                 }
             }

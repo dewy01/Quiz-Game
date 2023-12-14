@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Quiz_Gui_Game.Model
 {
@@ -28,7 +29,7 @@ namespace Quiz_Gui_Game.Model
             }
             else
             {
-               
+                MessageBox.Show("Błąd usuwania");
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quiz_Gui_Game.Animations;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace Quiz_Gui_Game
 
         public DeleteQuizContent()
         {
+            PageTransition.FadeIn(this, 0.5);
             InitializeComponent();
             LoadQuizzes();
             UpdateUI();
@@ -48,7 +50,7 @@ namespace Quiz_Gui_Game
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error loading quizzes: {ex.Message}");
+                Console.WriteLine($"Nie udało się załadować Quizów: {ex.Message}");
                 quizzes = new List<QuizInfo>();
             }
         }
@@ -69,7 +71,7 @@ namespace Quiz_Gui_Game
         {
             if (selectedFileIndex >= 0 && selectedFileIndex < quizzes.Count)
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this quiz?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Czy na pewno chcesz usunąć Quiz?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     string filePathToDelete = files[selectedFileIndex];
@@ -80,7 +82,7 @@ namespace Quiz_Gui_Game
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error deleting file: {ex.Message}");
+                        MessageBox.Show($"Błąd podczas usuwania: {ex.Message}");
                     }
 
                     LoadQuizzes();
@@ -89,12 +91,13 @@ namespace Quiz_Gui_Game
             }
             else
             {
-                MessageBox.Show("Please select a quiz to delete.");
+                MessageBox.Show("Wybierz Quiz przed usunięciem.");
             }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            PageTransition.FadeOut(this, 0.5);
             NavigationService.GoBack();
         }
     }

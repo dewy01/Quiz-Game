@@ -9,10 +9,19 @@
       Title="AllQuizzesPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80px"/>
+        </Grid.RowDefinitions>
+        
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg"/>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.png"/>
         </Grid.Background>
-        <TextBlock Text="All Quizzes" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,20"/>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
+            <Label Content="Wszystkie Quizy" Style="{StaticResource SubtitleStyle}"/>
+        </StackPanel>
 
         <ListBox Grid.Row="1" x:Name="QuizzesListBox" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ListBox.ItemTemplate>
@@ -25,6 +34,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Content="Back" Click="BackButton_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource QuizButtonStyle}"/>
+        <StackPanel Grid.Row="2" Width="200px">
+            <Button Content="Powrót" Click="BackButton_Click" VerticalAlignment="Center" Style="{StaticResource QuizButtonStyle}"/>        
+        </StackPanel>
+    
     </Grid>
 </Page>

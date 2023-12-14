@@ -1,4 +1,5 @@
-﻿using Quiz_Gui_Game.Controller;
+﻿using Quiz_Gui_Game.Animations;
+using Quiz_Gui_Game.Controller;
 using Quiz_Gui_Game.Model;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,9 @@ namespace Quiz_Gui_Game
             this.quizName = quizName;
         }
 
-        private void AddQuestionButton_Click(object sender, RoutedEventArgs e)
+        private async void AddQuestionButton_Click(object sender, RoutedEventArgs e)
         {
-
+            await SlideOutAndIn();
             string questionContent = QuestionTextBox.Text;
             List<string> answers = new List<string>
             {
@@ -58,6 +59,12 @@ namespace Quiz_Gui_Game
             dataHandler.SaveQuestions(newQuiz, quizPath);
             NavigationService.GoBack();
             NavigationService.GoBack();
+        }
+
+        private async Task SlideOutAndIn()
+        {
+            await PageTransition.SlideOutAsync(ContentGrid, 0.3, false);
+            await PageTransition.SlideInAsync(ContentGrid, 0.3, true);
         }
     }
 }

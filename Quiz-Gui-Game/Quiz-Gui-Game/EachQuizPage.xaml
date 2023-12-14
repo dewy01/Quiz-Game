@@ -10,20 +10,20 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg"/>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="80px"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
-            <Button Content="Back" Click="BackButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Width="200px">
+            <Button Content="Wyjdź" Click="BackButton_Click" Style="{StaticResource QuizButtonStyle}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock x:Name="QuizNameTextBlock" FontWeight="Bold" FontSize="16"/>
-            <TextBlock x:Name="ScoreTextBlock" Margin="0,0,0,20"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="QuizNameTextBlock" Style="{StaticResource SubtitleStyle}"/>
+            <Label x:Name="ScoreTextBlock" Style="{StaticResource SubtitleStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

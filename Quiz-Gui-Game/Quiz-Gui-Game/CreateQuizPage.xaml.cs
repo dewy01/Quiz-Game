@@ -1,4 +1,5 @@
-﻿using Quiz_Gui_Game.Controller;
+﻿using Quiz_Gui_Game.Animations;
+using Quiz_Gui_Game.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Quiz_Gui_Game
 
         public CreateQuizPage()
         {
+            PageTransition.FadeIn(this, 0.5);
             InitializeComponent();
             quizCreator = new QuizCreator();
         }
@@ -39,7 +41,7 @@ namespace Quiz_Gui_Game
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PageTransition.FadeOut(this, 0.5);
             NavigationService.GoBack();
 
         }

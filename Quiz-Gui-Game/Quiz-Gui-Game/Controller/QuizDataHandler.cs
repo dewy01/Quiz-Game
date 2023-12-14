@@ -24,7 +24,7 @@ namespace Quiz_Gui_Game.Controller
 
                     if (lines.Length % 5 != 0)
                     {
-                        MessageBox.Show("Incorrect file");
+                        MessageBox.Show("Niepoprawny plik");
                         return loadedQuestions;
                     }
 
@@ -36,7 +36,7 @@ namespace Quiz_Gui_Game.Controller
 
                         if (!int.TryParse(lines[i + 4], out correctOptionIndex) || correctOptionIndex < 1 || correctOptionIndex > 3)
                         {
-                            MessageBox.Show("Incorrect file");
+                            MessageBox.Show("Niepoprawny plik");
                             return loadedQuestions;
                         }
 
@@ -50,7 +50,7 @@ namespace Quiz_Gui_Game.Controller
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Incorrect file");
+                MessageBox.Show($"Niepoprawny plik: {ex}");
 
             }
 

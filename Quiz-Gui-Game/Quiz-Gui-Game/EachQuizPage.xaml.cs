@@ -1,4 +1,5 @@
-﻿using Quiz_Gui_Game.Model;
+﻿using Quiz_Gui_Game.Animations;
+using Quiz_Gui_Game.Model;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,6 +18,7 @@ namespace Quiz_Gui_Game
 
         public EachQuizPage(User user)
         {
+            PageTransition.FadeIn(this, 0.5);
             this.user = user;
             InitializeComponent();
             currentIndex = 0;
@@ -28,10 +30,9 @@ namespace Quiz_Gui_Game
             if (currentIndex < user.PlayedQuizzes.Count)
             {
                 var playedQuiz = user.PlayedQuizzes[currentIndex];
-                QuizNameTextBlock.Text = $"{playedQuiz.QuizName}";
-                ScoreTextBlock.Text = $"wynik: {playedQuiz.Score.ToString()}pkt";
+                QuizNameTextBlock.Content = $"{playedQuiz.QuizName}";
+                ScoreTextBlock.Content = $"|   {playedQuiz.Score}pkt";
 
-                // Delay for a second (1000 milliseconds)
                 await Task.Delay(1000);
 
                 currentIndex++;
@@ -39,18 +40,13 @@ namespace Quiz_Gui_Game
             }
             else
             {
-                // Navigate to AllQuizzesPage after displaying all quizzes
-                if(user.PlayedQuizzes.Count > 0)
-                {
-                    AllQuizzesPage allQuizzesPage = new AllQuizzesPage(user);
-                    NavigationService.Navigate(allQuizzesPage);
-                }
-                QuizNameTextBlock.Text = $"No quizzes to show";
+                QuizNameTextBlock.Content = $"Brak historii Quizów";
             }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            PageTransition.FadeOut(this, 0.5);
             NavigationService.GoBack();
         }
     }

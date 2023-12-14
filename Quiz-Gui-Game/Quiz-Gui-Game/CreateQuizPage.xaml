@@ -6,21 +6,21 @@
       xmlns:local="clr-namespace:Quiz_Gui_Game"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CreateQuizPage">
+      Title="CreateQuizPage" Opacity="0">
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg"/>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.png"/>
         </Grid.Background>
         <StackPanel HorizontalAlignment="center">
-            <Label FontSize="24px">Tworzenie Nowego Quizu</Label>
+            <Label Style="{StaticResource SubtitleStyle}">Tworzenie Nowego Quizu</Label>
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Podaj nazwę nowego Quizu:"/>
-            <TextBox x:Name="QuizNameTextBox" Width="200" Margin="0,5,0,10"/>
+            <Label Content="Podaj nazwę nowego Quizu:" Style="{StaticResource ParagraphStyle}"/>
+            <TextBox x:Name="QuizNameTextBox" Width="200" Margin="0,5,0,10" Style="{StaticResource QuizTextBoxStyle}"/>
             <Button Content="Dodaj Pytanie" Click="AddQuestionButton_Click" Style="{StaticResource QuizButtonStyle}"/>
-            <Button Content="Zakończ" Click="FinishButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+            <Button Content="Powrót" Click="FinishButton_Click" Style="{StaticResource QuizButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

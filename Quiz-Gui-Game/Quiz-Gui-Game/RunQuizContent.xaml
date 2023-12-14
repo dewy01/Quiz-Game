@@ -6,25 +6,30 @@
       xmlns:local="clr-namespace:Quiz_Gui_Game"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="RunQuizContent">
+      Title="RunQuizContent"
+      Opacity="0"
+      >
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg"/>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="80px"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="80px"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
-            <TextBlock Text="Choose a Quiz:" FontWeight="Bold" FontSize="16"/>
-            <Button Content="Start" Click="StartQuizButton_Click" Style="{StaticResource QuizButtonStyle}"/>
-            <Button Content="Back" Click="BackButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+            <Label Content="Wybierz Quiz" Style="{StaticResource SubtitleStyle}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Width="200px">
+            <Button Content="Zagraj" Click="StartQuizButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+            <Button Content="Powrót" Click="BackButton_Click" Style="{StaticResource QuizButtonStyle}"/>
         </StackPanel>
 
         <ListBox Grid.Row="1" x:Name="QuizzesListBox" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionMode="Single" SelectionChanged="QuizzesListBox_SelectionChanged">
-            <!-- Define the item template for each quiz -->
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

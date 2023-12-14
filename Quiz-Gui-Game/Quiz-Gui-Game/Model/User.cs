@@ -23,17 +23,6 @@ namespace Quiz_Gui_Game.Model
             string fileName = System.IO.Path.GetFileNameWithoutExtension(quizName.Substring(commonPath.Length));
             PlayedQuizzes.Add(new PlayedQuiz(fileName, score));
         }
-
-        public void DisplayPlayedQuizzes()
-        {
-
-
-            foreach (var playedQuiz in PlayedQuizzes)
-            {
-
-            }
-        }
-
     }
 
     public class PlayedQuiz

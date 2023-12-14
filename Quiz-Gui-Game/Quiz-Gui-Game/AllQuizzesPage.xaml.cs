@@ -23,7 +23,7 @@ namespace Quiz_Gui_Game
             }
             else
             {
-                MessageBox.Show("No quizzes to show");
+                MessageBox.Show("Brak historii Quizów");
             }
         }
 

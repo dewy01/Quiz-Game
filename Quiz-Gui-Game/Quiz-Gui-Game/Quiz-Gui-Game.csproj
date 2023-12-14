@@ -58,6 +58,7 @@
     <Compile Include="AllQuizzesPage.xaml.cs">
       <DependentUpon>AllQuizzesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Animations\PageTransition.cs" />
     <Compile Include="Controller\QuizCreator.cs" />
     <Compile Include="Controller\QuizDataHandler.cs" />
     <Compile Include="CreateQuestionPage.xaml.cs">
@@ -157,11 +158,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Animations\" />
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\background.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

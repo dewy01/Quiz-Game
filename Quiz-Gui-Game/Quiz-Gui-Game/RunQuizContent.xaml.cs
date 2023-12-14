@@ -1,4 +1,5 @@
-﻿using Quiz_Gui_Game.Controller;
+﻿using Quiz_Gui_Game.Animations;
+using Quiz_Gui_Game.Controller;
 using Quiz_Gui_Game.Model;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace Quiz_Gui_Game
 
         public RunQuizContent(bool isRandom, User user)
         {
+            PageTransition.FadeIn(this, 0.5);
             InitializeComponent();
             LoadQuizzes();
             this.isRandom = isRandom;
@@ -47,7 +49,7 @@ namespace Quiz_Gui_Game
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error loading quizzes: {ex.Message}");
+                Console.WriteLine($"Nie udało się załadować Quizu: {ex.Message}");
                 quizzes = new List<QuizInfo>();
             }
         }
@@ -83,7 +85,7 @@ namespace Quiz_Gui_Game
             }
             else
             {
-                MessageBox.Show("Please select a quiz and confirm to start.");
+                MessageBox.Show("Wybierz Quiz przed rozpoczęciem.");
             }
         }
 
