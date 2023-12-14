@@ -17,60 +17,17 @@
             <Label FontSize="24px" VerticalAlignment="Center" Content="Quizzowanie"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Zagraj" Click="PlayButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px" >
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="Padding" Value="10,2,10,3"/>
-                        <Setter Property="Background" Value="White"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Content="Zrób nowy quiz" Click="CreateQuizButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="Padding" Value="10,2,10,3"/>
-                        <Setter Property="Background" Value="White"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Content="Zagraj w losowy quiz" Click="RandomButton_Click"  Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="Padding" Value="10,2,10,3"/>
-                        <Setter Property="Background" Value="White"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Content="Usuń quiz" Click="DeleteButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="Padding" Value="10,2,10,3"/>
-                        <Setter Property="Background" Value="White"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Content="Wyświetl historię" Click="HistoryButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="Padding" Value="10,2,10,3"/>
-                        <Setter Property="Background" Value="White"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Content="Wyjdź" Click="ExitButton_Click" Margin="0 2 0 2" BorderBrush="LightBlue" BorderThickness="2px">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                        <Setter Property="Padding" Value="10,2,10,3"/>
-                        <Setter Property="Background" Value="White"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+            <Button Content="Zagraj" Click="PlayButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+
+            <Button Content="Zrób nowy quiz" Click="CreateQuizButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+
+            <Button Content="Zagraj w losowy quiz" Click="RandomButton_Click"  Style="{StaticResource QuizButtonStyle}"/>
+            
+            <Button Content="Usuń quiz" Click="DeleteButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+            
+            <Button Content="Wyświetl historię" Click="HistoryButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+
+            <Button Content="Wyjdź" Click="ExitButton_Click" Style="{StaticResource QuizButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

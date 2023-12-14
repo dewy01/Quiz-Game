@@ -19,9 +19,8 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Podaj nazwę nowego Quizu:"/>
             <TextBox x:Name="QuizNameTextBox" Width="200" Margin="0,5,0,10"/>
-            <Button Content="Dodaj Pytanie" Click="AddQuestionButton_Click"/>
-            <!-- Add other controls for adding questions and answers -->
-            <Button Content="Zakończ" Click="FinishButton_Click"/>
+            <Button Content="Dodaj Pytanie" Click="AddQuestionButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+            <Button Content="Zakończ" Click="FinishButton_Click" Style="{StaticResource QuizButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>
