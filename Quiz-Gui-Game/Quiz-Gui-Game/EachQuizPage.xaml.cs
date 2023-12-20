@@ -51,8 +51,7 @@ namespace Quiz_Gui_Game
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            PageTransition.FadeOut(this, 0.5);
-            NavigationService.GoBack();
+            currentIndex = user.PlayedQuizzes.Count;
         }
     }
 }

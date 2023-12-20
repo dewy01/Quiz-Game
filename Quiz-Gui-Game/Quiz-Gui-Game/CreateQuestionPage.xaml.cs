@@ -34,7 +34,7 @@ namespace Quiz_Gui_Game
 
         private async void AddQuestionButton_Click(object sender, RoutedEventArgs e)
         {
-            await SlideOutAndIn();
+            await PageTransition.SlideOutAsync(ContentGrid, 0.3, false);
             string questionContent = QuestionTextBox.Text;
             List<string> answers = new List<string>
             {
@@ -50,6 +50,7 @@ namespace Quiz_Gui_Game
             Answer2TextBox.Clear();
             Answer3TextBox.Clear();
             CorrectAnswerComboBox.SelectedIndex = -1;
+            await PageTransition.SlideInAsync(ContentGrid, 0.3, true);
         }
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
@@ -59,12 +60,6 @@ namespace Quiz_Gui_Game
             dataHandler.SaveQuestions(newQuiz, quizPath);
             NavigationService.GoBack();
             NavigationService.GoBack();
-        }
-
-        private async Task SlideOutAndIn()
-        {
-            await PageTransition.SlideOutAsync(ContentGrid, 0.3, false);
-            await PageTransition.SlideInAsync(ContentGrid, 0.3, true);
         }
     }
 }

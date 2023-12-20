@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Width="200px">
-            <Button Content="Wyjdź" Click="BackButton_Click" Style="{StaticResource QuizButtonStyle}"/>
+            <Button Content="Pomiń" Click="BackButton_Click" Style="{StaticResource QuizButtonStyle}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
